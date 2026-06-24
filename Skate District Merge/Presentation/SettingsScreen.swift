@@ -3,6 +3,7 @@ import SwiftUI
 struct SettingsScreen: View {
     @Environment(GameStore.self) private var store
     @State private var showResetConfirm = false
+    @State private var showPrivacy = false
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
@@ -28,6 +29,9 @@ struct SettingsScreen: View {
                         store.menuRoute = nil
                         store.resetTutorial()
                     }
+                    SettingAction(title: "Privacy Policy", symbol: "hand.raised.fill", tint: Palette.cyan) {
+                        showPrivacy = true
+                    }
                     SettingAction(title: "Reset Progress", symbol: "trash.fill", tint: Palette.danger) {
                         showResetConfirm = true
                     }
@@ -47,6 +51,9 @@ struct SettingsScreen: View {
             }
         } message: {
             Text("This wipes your board, district, levels, and collection. This cannot be undone.")
+        }
+        .sheet(isPresented: $showPrivacy) {
+            PrivacyPolicyView()
         }
     }
 

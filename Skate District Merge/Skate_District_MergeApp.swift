@@ -12,7 +12,7 @@ struct Skate_District_MergeApp: App {
 
     var body: some Scene {
         WindowGroup {
-            RootView()
+            LaunchRouterView()
                 .environment(store)
                 .task { store.start() }
                 .preferredColorScheme(.dark)
